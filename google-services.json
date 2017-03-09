@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "993030586718",
+    "firebase_url": "https://stepcrusade.firebaseio.com",
+    "project_id": "stepcrusade",
+    "storage_bucket": "stepcrusade.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993030586718:android:d6252928b5865e50",
+        "android_client_info": {
+          "package_name": "com.Cross.StepCrusade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993030586718-0ss71rko86efirn2n6kh9d2glugss9nt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANXmssFFQDmXMY09LSL8jEK-xNCwRkBPg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
