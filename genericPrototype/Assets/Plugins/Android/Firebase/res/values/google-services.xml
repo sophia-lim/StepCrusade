@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="firebase_database_url" translatable="false">https://stepcrusade.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">993030586718</string>
+  <string name="google_storage_bucket" translatable="false">stepcrusade.appspot.com</string>
+  <string name="google_api_key" translatable="false">AIzaSyANXmssFFQDmXMY09LSL8jEK-xNCwRkBPg</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyANXmssFFQDmXMY09LSL8jEK-xNCwRkBPg</string>
+  <string name="google_app_id" translatable="false">1:993030586718:android:d6252928b5865e50</string>
+  <string name="default_web_client_id" translatable="false">993030586718-0ss71rko86efirn2n6kh9d2glugss9nt.apps.googleusercontent.com</string>
+</resources>
