@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
 	public GameObject levelButtonContainer;
 	public GameObject shopButtonPrefab;
 	public GameObject shopButtonContainer;
+	public Text currencyText;
 
 	public Material playerMaterial;
 
@@ -21,7 +22,8 @@ public class MainMenu : MonoBehaviour
 
 	private void Start ()
 	{
-		ChangePlayerSkin (0);
+		ChangePlayerSkin (GameManager.Instance.currentSkinIndex);
+		currencyText.text = "Currency : " + GameManager.Instance.currency.ToString();
 		cameraTransform = Camera.main.transform;
 
 		Sprite[] thumbnails = Resources.LoadAll<Sprite> ("Levels");
@@ -84,7 +86,9 @@ public class MainMenu : MonoBehaviour
 		else if (y == 0.25f)
 			y = 0f;
 
-		playerMaterial.SetTextureOffset ("_MainTex", new Vector2 (x,y));	
+		playerMaterial.SetTextureOffset ("_MainTex", new Vector2 (x,y));
+		GameManager.Instance.currentSkinIndex = index;
+		GameManager.Instance.Save ();
 	}
 
 }
