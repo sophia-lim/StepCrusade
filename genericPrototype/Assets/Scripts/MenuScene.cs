@@ -27,6 +27,8 @@ public class MenuScene : MonoBehaviour
 	private int selectedInventoryIndex;
 	private int selectedPurchaseIndex; 
 
+	private MenuCamera menuCam;
+
 	public Text goldText;
 	private int activeInventoryIndex;
 	private int activePurchaseIndex;
@@ -34,10 +36,21 @@ public class MenuScene : MonoBehaviour
 
 	private Vector3 desiredMenuPosition;
 
+	public AnimationCurve enteringLevelZoomCurve;
+	private bool isEnteringLevel = false;
+	private float zoomDuration = 3.0f;
+	private float zoomTransition;
+
 	private void Start () 
 	{
+		// Find the only MenuCamera and asign it
+		menuCam = FindObjectOfType<MenuCamera>();
+
 		//$$ TEMPORARY....Temporarily setting the amount of gold the player starts with to 999.
 		SaveManager.Instance.state.gold = 999;
+
+		// Position our camera on the focu menu.
+		SetCameraTo(Manager.Instance.menuFocus);
 
 		//Tell our gold text how much it should be displaying
 		UpdateGoldText();
@@ -77,7 +90,39 @@ public class MenuScene : MonoBehaviour
 		// Menu Navigation (smooth)
 		// If you want the speed of the transition to be faster increase 0.1f, to slow it, decrease 0.1f
 		menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPosition, 0.1f);
+
+		//Entering level zoomDuration.
+		if(isEnteringLevel)
+		{
+			// Add to the zoomTransition float.
+			zoomTransition += (1/zoomDuration) * Time.deltaTime;
+
+			// Change the scale, followingthe AnimationCurve.
+			menuContainer.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 5, enteringLevelZoomCurve.Evaluate(zoomTransition));
+		
+			//Change the desired position of the canvas, so it can follow the scale up.
+			//This zooms in the center.
+			Vector3 newDesiredPosition = desiredMenuPosition * 5;
+			//This adds to the specific position of the level on the canvas.
+			RectTransform rt = mapPanel.GetChild(Manager.Instance.currentLevel).GetComponent<RectTransform>();
+			newDesiredPosition -= rt.anchoredPosition3D * 5;
+
+			//this line will override the previous position Update.
+			menuContainer.anchoredPosition3D = Vector3.Lerp(desiredMenuPosition,newDesiredPosition,enteringLevelZoomCurve.Evaluate(zoomTransition));
+
+			// fade to white screen, this will override the first line of the update. 
+			fadeGroup.alpha = zoomTransition;
+
+			//Are we done with the animation
+			if(zoomTransition >= 1)
+			{
+				//Enter the level.
+				SceneManager.LoadScene("Game");
+			} 
+		}
 	}
+
+	
 
 	private void InitShop()
 	{
@@ -136,6 +181,32 @@ public class MenuScene : MonoBehaviour
 		
 			Button b = t.GetComponent<Button> ();
 			b.onClick.AddListener (() => OnMapSelect (currentIndex));
+
+			Image img = t.GetComponent<Image>();
+
+			//is it unlocked?
+			if(i <=SaveManager.Instance.state.completedLevel)
+			{
+				// It is unlocked!
+				if(i == SaveManager.Instance.state.completedLevel)
+				{
+					// Its not completed!
+					img.color = Color.white;
+				}
+				else
+				{
+					//level is already completed
+					img.color = Color.green;
+				}
+			}
+			else
+			{
+				// Level isn't unlocked. disable the button. can't click on it
+				b.interactable = false;
+
+				//Set to a dark color.
+				img.color = Color.grey;
+			}
 
 			i++;
 
@@ -214,8 +285,9 @@ public class MenuScene : MonoBehaviour
 	
 	private void OnMapSelect (int currentIndex)
 	{
+		Manager.Instance.currentLevel = currentIndex;
 		//Debug.Log ("Selecting QualityLevel : " + currentIndex);
-		SceneManager.LoadScene ("Game");
+		isEnteringLevel = true;
 	}
 
 
@@ -288,6 +360,14 @@ public class MenuScene : MonoBehaviour
 		}
 	}
 
+	private void SetCameraTo(int menuIndex)
+	{
+
+		NavigateTo(menuIndex);
+		menuContainer.anchoredPosition3D = desiredMenuPosition;
+		
+	}
+
 	private void NavigateTo (int menuIndex)
 	{	
 		// 0 && default xase = main menu.
@@ -296,15 +376,18 @@ public class MenuScene : MonoBehaviour
 		default:
 		case 0:
 			desiredMenuPosition = Vector3.zero;
+			menuCam.BackToMainMenu();
 			break;
 		// 1 = Map menu
 		case 1:
 			// In future iterations, 1600 might need to be changed to screen width when the ratio changes. 
 			desiredMenuPosition = Vector3.right * 1280;
+			menuCam.MoveToShop();
 			break;
 		//2 = Customization menu
 		case 2:
 			desiredMenuPosition = Vector3.left * 1280;
+			menuCam.MoveToShop();
 			break;
 
 			// Future cases for up will require a Vector 3 to be multiplied by 900 (the screen height)

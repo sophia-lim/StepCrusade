@@ -126,6 +126,17 @@ public class SaveManager : MonoBehaviour
 		state.shopItemOwned |= 1 << index;
 	}
 
+	// Complete level
+	public void CompleteLevel(int index)
+	{
+		// if this is the current active level
+		if(state.completedLevel == index)
+		{
+			state.completedLevel++;
+			Save();
+		}
+	}
+
 	// Reset the whole save file
 	public void ResetSave()
 	{
