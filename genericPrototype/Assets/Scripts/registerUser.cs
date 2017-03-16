@@ -21,6 +21,11 @@ public class registerUser : MonoBehaviour {
         mainPanel.anchoredPosition3D = Vector3.Lerp(mainPanel.anchoredPosition3D, panelPosition, 0.1f);
     }
 
+    /***************************
+    ** METHODS FOR NAVIGATION **
+    ***************************/
+
+    //Checks current panel and which panel to go, move to panel, and update current panel index
     private void changePanelPosition(int panelIndex) {
         Debug.Log("The current panel is:" + currentPanel);
 
@@ -46,16 +51,19 @@ public class registerUser : MonoBehaviour {
     public void goToPanelCreate() {
         changePanelPosition(0);
     }
+
     //Move to createUserPanel
     public void goToPanelRegister() {
         Debug.Log("Create hero button clicked.");
         changePanelPosition(1);
     }
+
     //Move to createConfirmationPanel
     public void goToPanelConfirmation() {
         changePanelPosition(2);
     }
 
+    //Move back to menu
     public void goToMenu() {
         SceneManager.LoadScene("Menu");
     }
