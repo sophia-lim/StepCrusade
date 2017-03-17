@@ -11,10 +11,13 @@ public class registerInput : MonoBehaviour {
     public Text heroName;
 
     public InputField emailInput;
-    public static string email;
+    public Text email;
 
     public InputField passwordInput;
-    public static string password;
+    private Text password;
+
+    public InputField confirmPasswordInput;
+    private Text confirmPassword;
 
 
     // Checks if there is anything entered into the input field.
@@ -32,9 +35,8 @@ public class registerInput : MonoBehaviour {
         //Adds a listener that invokes the "LockInput" method when the player finishes editing the main input field.
         //Passes the main input field into the method when "LockInput" is invoked
         heroNameInput.onEndEdit.AddListener(delegate { LockInput(heroNameInput, heroName); });
-        //emailInput.onEndEdit.AddListener(delegate { LockInput(emailInput, email); });
-        //passwordInput.onEndEdit.AddListener(delegate { LockInput(passwordInput, password); });
-
+        emailInput.onEndEdit.AddListener(delegate { LockInput(emailInput, email); });
+        passwordInput.onEndEdit.AddListener(delegate { LockInput(passwordInput, password); });
     }
 
 
