@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class SaveManager : MonoBehaviour
 	public SaveState state;
 
 	private void Awake () 
-	{
+	{	
 		
 		DontDestroyOnLoad (gameObject);
 		Instance = this;
@@ -49,12 +48,8 @@ public class SaveManager : MonoBehaviour
 		}
 	}
 
-    internal void CompleteLevel(int currentLevel) {
-        throw new NotImplementedException();
-    }
-
-    // Check if the equipment is owned
-    public bool IsEquipmentOwned (int index)
+	// Check if the equipment is owned
+	public bool IsEquipmentOwned (int index)
 	{
 		// Checking bits.
 		//If you have 16 items it would look like this: 0000 0000 0000 0000.
@@ -129,6 +124,17 @@ public class SaveManager : MonoBehaviour
 	{
 		// Toggle on the bit at index
 		state.shopItemOwned |= 1 << index;
+	}
+
+	// Complete level
+	public void CompleteLevel(int index)
+	{
+		// if this is the current active level
+		if(state.completedLevel == index)
+		{
+			state.completedLevel++;
+			Save();
+		}
 	}
 
 	// Reset the whole save file

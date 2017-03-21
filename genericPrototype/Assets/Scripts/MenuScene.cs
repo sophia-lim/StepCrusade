@@ -10,8 +10,10 @@ public class MenuScene : MonoBehaviour
 	// Last 3 seconds = 0.33f. If u wanted 10 seconds = 0.10f;
 	private float fadeInSpeed = 0.33f;
 
+
 	public RectTransform menuContainer; 
 	public Transform mapPanel;
+
 	public Transform inventoryPanel;
 	public Transform shopPanel;
 
@@ -25,6 +27,8 @@ public class MenuScene : MonoBehaviour
 	private int selectedInventoryIndex;
 	private int selectedPurchaseIndex; 
 
+	private MenuCamera menuCam;
+
 	public Text goldText;
 	private int activeInventoryIndex;
 	private int activePurchaseIndex;
@@ -32,10 +36,21 @@ public class MenuScene : MonoBehaviour
 
 	private Vector3 desiredMenuPosition;
 
+	public AnimationCurve enteringLevelZoomCurve;
+	private bool isEnteringLevel = false;
+	private float zoomDuration = 3.0f;
+	private float zoomTransition;
+
 	private void Start () 
 	{
+		// Find the only MenuCamera and asign it
+		menuCam = FindObjectOfType<MenuCamera>();
+
 		//$$ TEMPORARY....Temporarily setting the amount of gold the player starts with to 999.
 		SaveManager.Instance.state.gold = 999;
+
+		// Position our camera on the focu menu.
+		SetCameraTo(Manager.Instance.menuFocus);
 
 		//Tell our gold text how much it should be displaying
 		UpdateGoldText();
@@ -75,7 +90,39 @@ public class MenuScene : MonoBehaviour
 		// Menu Navigation (smooth)
 		// If you want the speed of the transition to be faster increase 0.1f, to slow it, decrease 0.1f
 		menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPosition, 0.1f);
+
+		//Entering level zoomDuration.
+		if(isEnteringLevel)
+		{
+			// Add to the zoomTransition float.
+			zoomTransition += (1/zoomDuration) * Time.deltaTime;
+
+			// Change the scale, followingthe AnimationCurve.
+			menuContainer.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 5, enteringLevelZoomCurve.Evaluate(zoomTransition));
+		
+			//Change the desired position of the canvas, so it can follow the scale up.
+			//This zooms in the center.
+			Vector3 newDesiredPosition = desiredMenuPosition * 5;
+			//This adds to the specific position of the level on the canvas.
+			RectTransform rt = mapPanel.GetChild(Manager.Instance.currentLevel).GetComponent<RectTransform>();
+			newDesiredPosition -= rt.anchoredPosition3D * 5;
+
+			//this line will override the previous position Update.
+			menuContainer.anchoredPosition3D = Vector3.Lerp(desiredMenuPosition,newDesiredPosition,enteringLevelZoomCurve.Evaluate(zoomTransition));
+
+			// fade to white screen, this will override the first line of the update. 
+			fadeGroup.alpha = zoomTransition;
+
+			//Are we done with the animation
+			if(zoomTransition >= 1)
+			{
+				//Enter the level.
+				SceneManager.LoadScene("Game");
+			} 
+		}
 	}
+
+	
 
 	private void InitShop()
 	{
@@ -94,7 +141,7 @@ public class MenuScene : MonoBehaviour
 
 			// Set the color of the image, based on if owned or not.
 			Image img = t.GetComponent<Image>();
-			img.color = SaveManager.Instance.IsEquipmentOwned (i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+			img.color = SaveManager.Instance.IsEquipmentOwned (i) ? Manager.Instance.playerColors[currentIndex] : Color.Lerp(Manager.Instance.playerColors[currentIndex], new Color(0,0,0,1),0.25f);
 
 			i++;
 
@@ -131,16 +178,39 @@ public class MenuScene : MonoBehaviour
 		foreach (Transform t in mapPanel) 
 		{
 			int currentIndex = i;
-
+		
 			Button b = t.GetComponent<Button> ();
 			b.onClick.AddListener (() => OnMapSelect (currentIndex));
+
+			Image img = t.GetComponent<Image>();
+
+			//is it unlocked?
+			if(i <=SaveManager.Instance.state.completedLevel)
+			{
+				// It is unlocked!
+				if(i == SaveManager.Instance.state.completedLevel)
+				{
+					// Its not completed!
+					img.color = Color.white;
+				}
+				else
+				{
+					//level is already completed
+					img.color = Color.green;
+				}
+			}
+			else
+			{
+				// Level isn't unlocked. disable the button. can't click on it
+				b.interactable = false;
+
+				//Set to a dark color.
+				img.color = Color.grey;
+			}
 
 			i++;
 
 		}
-
-
-		
 	}
 
 	private void OnInventorySelect (int currentIndex)
@@ -215,7 +285,9 @@ public class MenuScene : MonoBehaviour
 	
 	private void OnMapSelect (int currentIndex)
 	{
-		Debug.Log ("Selecting QualityLevel : " + currentIndex);
+		Manager.Instance.currentLevel = currentIndex;
+		//Debug.Log ("Selecting QualityLevel : " + currentIndex);
+		isEnteringLevel = true;
 	}
 
 
@@ -237,7 +309,8 @@ public class MenuScene : MonoBehaviour
 					SetEquipment(selectedInventoryIndex);
 
 					//Whenever you have bought something. Change the color of the button.
-					inventoryPanel.GetChild(selectedInventoryIndex).GetComponent<Image>().color = Color.white;
+				inventoryPanel.GetChild(selectedInventoryIndex).GetComponent<Image>().color = Manager.Instance.playerColors[selectedInventoryIndex];
+
 					
 					// Update the gold text.
 					UpdateGoldText();
@@ -288,6 +361,14 @@ public class MenuScene : MonoBehaviour
 		}
 	}
 
+	private void SetCameraTo(int menuIndex)
+	{
+
+		NavigateTo(menuIndex);
+		menuContainer.anchoredPosition3D = desiredMenuPosition;
+		
+	}
+
 	private void NavigateTo (int menuIndex)
 	{	
 		// 0 && default xase = main menu.
@@ -296,15 +377,18 @@ public class MenuScene : MonoBehaviour
 		default:
 		case 0:
 			desiredMenuPosition = Vector3.zero;
+			menuCam.BackToMainMenu();
 			break;
-		// 1 = Map menu
+		// 1 = Equipment
 		case 1:
 			// In future iterations, 1600 might need to be changed to screen width when the ratio changes. 
 			desiredMenuPosition = Vector3.right * 1280;
+			menuCam.MoveToShop();
 			break;
-		//2 = Customization menu
+		//2 = Map
 		case 2:
 			desiredMenuPosition = Vector3.left * 1280;
+			menuCam.MoveToLevel();
 			break;
 
 			// Future cases for up will require a Vector 3 to be multiplied by 900 (the screen height)
@@ -318,6 +402,8 @@ public class MenuScene : MonoBehaviour
 		SaveManager.Instance.state.activeEquipment = index;
 
 		// Chnage the selected equipment on the player model
+		Manager.Instance.playerMaterial.color = Manager.Instance.playerColors[index];
+
 
 		// Change equip button text
 		inventoryEquipButton.text = "Current";
@@ -350,27 +436,17 @@ public class MenuScene : MonoBehaviour
 	//Buttons
 	public void OnEquipmentClick()
 	{
-		NavigateTo (2);
+		NavigateTo (1);
 	}
 
 	public void OnMapClick() 
 	{
-		NavigateTo (1);
+		NavigateTo (2);
 	}
 
 	public void OnBackClick()
 	{
 		NavigateTo (0);
 	}
-
-    //Sophia: Go to sign up scene
-    public void Register() {
-        SceneManager.LoadScene("Register");
-    }    
-    
-    //Sophia: Go to forgot password scene
-    public void Password() {
-        SceneManager.LoadScene("Password");
-    }
 
 }
