@@ -13,12 +13,16 @@ public class PedometerDemo : MonoBehaviour {
 	public Text stepCountText;
 	public Text stepDetectText;
 
-	//Edit by StepCrusade
+	//Edit by StepCrusade for mana crusade
 	public Text manaCrusadeText;
 	public Text stepCountCrusadeText;
 	public int manaCrusade = 0;
 	public int stepCountCrusade = 0;
 	public bool isTapped = false;
+
+	//Edit by StepCrusade for level
+	public Text levelCrusadeText;
+	public int levelCrusade = 0;
 
 	
 	// Use this for initialization
@@ -42,7 +46,7 @@ public class PedometerDemo : MonoBehaviour {
 			pedometerPlugin.Init();
 			
 			//set this to true to always starts at zero steps, else set to false to continue steps
-			pedometerPlugin.SetAlwaysStartAtZero(false);
+			pedometerPlugin.SetAlwaysStartAtZero(true);
 			
 			//set call back listener for pedometer events
 			pedometerPlugin.SetCallbackListener(OnStepCount,OnStepDetect);
@@ -109,8 +113,9 @@ public class PedometerDemo : MonoBehaviour {
 	private void UpdateStepCount(int count){
 		if(stepCountText!=null){
 			stepCountText.text = String.Format("Step Count: {0}",count);
-			stepCountCrusade = count;
+			stepCountCrusade = count - (manaCrusade*200);
 			calculateMana (stepCountCrusade);
+			calculateLevelCrusade (count);
 		}
 	}
 
@@ -123,7 +128,7 @@ public class PedometerDemo : MonoBehaviour {
 
 	//Transforms step counts into mana (activity level)
 	public void calculateMana(int stepCrusadeCounts){
-		if (stepCrusadeCounts%200 == 0 && manaCrusade != 75) {
+		if (stepCrusadeCounts != 0 && stepCrusadeCounts%200 == 0 && manaCrusade != 100) {
 			manaCrusade += 1;
 			updateStepCrusadeCounts();
 		}
@@ -142,6 +147,13 @@ public class PedometerDemo : MonoBehaviour {
 	public void updateStepCrusadeCounts(){
 		stepCountCrusade -= 200;
 	}
-
+		
+	//Leveling up 
+	public void calculateLevelCrusade(int stepCounts) {
+		if (stepCounts != 0 && stepCounts % 50 == 0 && levelCrusade <= 99) {
+			levelCrusade += 1;
+			levelCrusadeText.text = levelCrusade.ToString();
+		}
+	}
 
 }

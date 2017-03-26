@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/AndroidSensor/Scenes/Demo.unity
+- path: Assets/SophiasPedometerTest.unity
   isLoaded: 1
   isActive: 1
