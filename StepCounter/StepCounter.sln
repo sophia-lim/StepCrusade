@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepCounter", "Assembly-CSharp.csproj", "{7E18B41C-AB85-F00E-C7C7-D0E08DAF2791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepCounter", "Assembly-CSharp-Editor.csproj", "{527E2A89-E652-F8B5-1C47-BCB5E4CA9644}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E18B41C-AB85-F00E-C7C7-D0E08DAF2791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E18B41C-AB85-F00E-C7C7-D0E08DAF2791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E18B41C-AB85-F00E-C7C7-D0E08DAF2791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E18B41C-AB85-F00E-C7C7-D0E08DAF2791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{527E2A89-E652-F8B5-1C47-BCB5E4CA9644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{527E2A89-E652-F8B5-1C47-BCB5E4CA9644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{527E2A89-E652-F8B5-1C47-BCB5E4CA9644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{527E2A89-E652-F8B5-1C47-BCB5E4CA9644}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
