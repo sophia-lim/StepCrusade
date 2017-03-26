@@ -24,6 +24,8 @@ public class PedometerDemo : MonoBehaviour {
 	public Text levelCrusadeText;
 	public int levelCrusade = 0;
 
+	//
+
 	
 	// Use this for initialization
 	void Start (){
@@ -53,6 +55,7 @@ public class PedometerDemo : MonoBehaviour {
 			
 			//register sensor event listener and pass sensor delay that you want
 			pedometerPlugin.RegisterSensorListener(SensorDelay.SENSOR_DELAY_FASTEST);
+
 		}else{
 			UpdateStepDetectorStatus("not available");
 		}

@@ -49,6 +49,7 @@
      <Compile Include="Assets\AndroidSensor\Scripts\Callback\IPedometerCallback.cs" />
      <Compile Include="Assets\AndroidSensor\Scripts\Callback\IShakeCallback.cs" />
      <Compile Include="Assets\AndroidSensor\Scripts\Enums\SensorDelay.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Examples\Ghost.cs" />
      <Compile Include="Assets\AndroidSensor\Scripts\Examples\PedometerDemo.cs" />
      <Compile Include="Assets\AndroidSensor\Scripts\Examples\ShakeDemo.cs" />
      <Compile Include="Assets\AndroidSensor\Scripts\Main\AUPHolder.cs" />
