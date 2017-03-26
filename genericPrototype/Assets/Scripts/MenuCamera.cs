@@ -12,6 +12,8 @@ public class MenuCamera : MonoBehaviour
 
 	public Transform shopWaypoint;
 	public Transform levelWaypoint;
+	public Transform dialWaypoint;
+	public Transform settingsWaypoint;
 
 	private void Start()
 	{
@@ -43,5 +45,14 @@ public class MenuCamera : MonoBehaviour
 		desiredPosition = levelWaypoint.localPosition;
 		desiredRotation = levelWaypoint.localRotation;
 	}
-
+	public void MoveToDial()
+	{
+		desiredPosition = dialWaypoint.localPosition;
+		desiredRotation = dialWaypoint.localRotation;
+	}
+	public void MoveToSettings()
+	{
+		desiredPosition = settingsWaypoint.localPosition;
+		desiredRotation = settingsWaypoint.localRotation;
+	}
 }

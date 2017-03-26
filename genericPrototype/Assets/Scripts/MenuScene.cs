@@ -17,8 +17,14 @@ public class MenuScene : MonoBehaviour
 	public Transform inventoryPanel;
 	public Transform shopPanel;
 
+	public Transform dialPanel;
+	public Transform settingsPanel;
+
+
+
 	public Text inventoryEquipButton;
 	public Text shopPurchaseButton;
+
 
 	//Setting the price for the actual items in the inventory
 	private int[] inventoryCost = new int[] {0, 5, 5, 5, 10, 10, 10, 15, 15, 10 };
@@ -67,6 +73,7 @@ public class MenuScene : MonoBehaviour
 
 		// Add buttons on-click event to map zones.
 		InitMap();
+
 
 		//Set player's preferences (equipment & purchases)
 		// this mightneed to be OnEquipment button.
@@ -391,7 +398,16 @@ public class MenuScene : MonoBehaviour
 			menuCam.MoveToLevel();
 			break;
 
-			// Future cases for up will require a Vector 3 to be multiplied by 900 (the screen height)
+		case 3:
+			desiredMenuPosition = Vector3.down * 800;
+			menuCam.MoveToDial();
+			break;
+
+		case 4: 
+			desiredMenuPosition = Vector3.up * 800;
+			menuCam.MoveToSettings();
+			break;
+			// Future cases for up will require a Vector 3 to be multiplied by 800 (the screen height)
 		}
 	}
 
@@ -447,6 +463,17 @@ public class MenuScene : MonoBehaviour
 	public void OnBackClick()
 	{
 		NavigateTo (0);
+	}
+
+	public void OnDialClick()
+	{
+		//Debug.Log ("I've clicked");
+		NavigateTo (3);
+
+	}
+	public void OnSettingsClick()
+	{
+		NavigateTo (4);
 	}
 
 }
