@@ -46,15 +46,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AndroidSensor\Scripts\Callback\IPedometerCallback.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Callback\IShakeCallback.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Enums\SensorDelay.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Examples\ShakeDemo.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Main\AUPHolder.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Main\DemoController.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Main\PedometerPlugin.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Main\ShakePlugin.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Main\Utils.cs" />
+     <Compile Include="Assets\AndroidSensor\Scripts\Main\UtilsPlugin.cs" />
      <Compile Include="Assets\Scripts\GameScene.cs" />
+     <Compile Include="Assets\Scripts\Ghost.cs" />
      <Compile Include="Assets\Scripts\Helper.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\MenuCamera.cs" />
      <Compile Include="Assets\Scripts\MenuScene.cs" />
+     <Compile Include="Assets\Scripts\PedometerDemo.cs" />
      <Compile Include="Assets\Scripts\Preloader.cs" />
      <Compile Include="Assets\Scripts\SaveManager.cs" />
      <Compile Include="Assets\Scripts\SaveState.cs" />
      <Compile Include="Assets\Scripts\WorldInteraction.cs" />
+     <None Include="Assets\AndroidSensor\ReadMe.txt.txt" />
+     <None Include="Assets\Plugins\Android\aup_androidSensor\SampleAndroidManifest\AndroidManifest.xml" />
+     <None Include="Assets\AndroidSensor\Meta.txt" />
+     <None Include="Assets\Plugins\Android\aup_androidSensor\AndroidManifest.xml" />
+     <None Include="Assets\AndroidSensor\Features.txt" />
+     <None Include="Assets\AndroidSensor\changelog.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
