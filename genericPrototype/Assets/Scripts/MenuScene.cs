@@ -395,7 +395,7 @@ public class MenuScene : MonoBehaviour
 		//2 = Map
 		case 2:
 			desiredMenuPosition = Vector3.left * 1280;
-			menuCam.MoveToLevel();
+            menuCam.MoveToLevel();
 			break;
 
 		case 3:
@@ -476,4 +476,7 @@ public class MenuScene : MonoBehaviour
 		NavigateTo (4);
 	}
 
+    public void loadLevel() {
+        SceneManager.LoadScene("Level1");
+    }
 }

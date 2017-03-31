@@ -17,7 +17,15 @@ public class WorldInteraction : MonoBehaviour {
 			GetInteraction ();
 	}
 
-	void GetInteraction()
+
+    void OnCollisionEnter(Collision col) {
+        Debug.Log("Had collided with ghost.");
+        if (col.gameObject.name == "Cube") {
+            Destroy(col.gameObject);
+        }
+    }
+
+    void GetInteraction()
 	{
 		Ray interactionRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit interactionInfo;
