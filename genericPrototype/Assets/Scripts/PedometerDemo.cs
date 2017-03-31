@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using System;
 
 public class PedometerDemo : MonoBehaviour {
@@ -24,7 +25,10 @@ public class PedometerDemo : MonoBehaviour {
 	public Text levelCrusadeText;
 	public int levelCrusade = 0;
 
-	//
+	//Go back to menu
+    public void goToMenu() {
+        SceneManager.LoadScene("Menu");
+    }
 
 	
 	// Use this for initialization
@@ -149,7 +153,7 @@ public class PedometerDemo : MonoBehaviour {
 
 	//Subtract step counts w/ 1000 after count
 	public void updateStepCrusadeCounts(){
-		stepCountCrusade -= 200;
+		stepCountCrusade -= 20;
 	}
 		
 	//Leveling up 
