@@ -124,7 +124,7 @@ public class MenuScene : MonoBehaviour
 			if(zoomTransition >= 1)
 			{
 				//Enter the level.
-				SceneManager.LoadScene("Game");
+				SceneManager.LoadScene("Level1");
 			} 
 		}
 	}
