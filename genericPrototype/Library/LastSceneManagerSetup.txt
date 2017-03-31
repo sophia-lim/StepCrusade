@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< Updated upstream
-- path: Assets/Scenes/Menu.unity
-=======
-- path: Assets/Scenes/Preloader.unity
->>>>>>> Stashed changes
+- path: Assets/SophiasPedometerTest.unity
   isLoaded: 1
   isActive: 1
