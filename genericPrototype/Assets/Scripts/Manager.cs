@@ -7,6 +7,7 @@ public class Manager : MonoBehaviour {
 	public static Manager Instance {set; get;}
 
 	public Material playerMaterial;
+	public Texture[] playerTextures = new Texture[4];
 	public Color[] playerColors = new Color[10];
 	public GameObject[] shopItems = new GameObject[10];
 

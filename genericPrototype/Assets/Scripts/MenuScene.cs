@@ -316,8 +316,8 @@ public class MenuScene : MonoBehaviour
 					SetEquipment(selectedInventoryIndex);
 
 					//Whenever you have bought something. Change the color of the button.
-				inventoryPanel.GetChild(selectedInventoryIndex).GetComponent<Image>().color = Manager.Instance.playerColors[selectedInventoryIndex];
-
+					inventoryPanel.GetChild(selectedInventoryIndex).GetComponent<Image>().color = Manager.Instance.playerColors[selectedInventoryIndex];
+					
 					
 					// Update the gold text.
 					UpdateGoldText();
@@ -418,7 +418,10 @@ public class MenuScene : MonoBehaviour
 		SaveManager.Instance.state.activeEquipment = index;
 
 		// Chnage the selected equipment on the player model
-		Manager.Instance.playerMaterial.color = Manager.Instance.playerColors[index];
+		//Manager.Instance.playerMaterial.color = Manager.Instance.playerColors[index];
+
+		//Change the selected skin on the player model (SL)
+		Manager.Instance.playerMaterial.mainTexture = Manager.Instance.playerTextures[index];
 
 
 		// Change equip button text

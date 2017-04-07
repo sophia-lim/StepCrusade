@@ -134,9 +134,9 @@ public class PedometerDemo : MonoBehaviour {
 	}
 
 	//Transforms step counts into mana (activity level)
-    //For testing purposes, the value is 20, but in-game should be 200
+    //For testing purposes, the value is 10, but in-game should be 200
 	public void calculateMana(int stepCrusadeCounts){
-		if (stepCrusadeCounts != 0 && stepCrusadeCounts%20 == 0 && manaCrusade != 100) {
+		if (stepCrusadeCounts != 0 && stepCrusadeCounts%10 == 0 && manaCrusade != 100) {
 			manaCrusade += 1;
 			updateStepCrusadeCounts();
 		}
@@ -153,7 +153,7 @@ public class PedometerDemo : MonoBehaviour {
 
 	//Subtract step counts w/ 1000 after count
 	public void updateStepCrusadeCounts(){
-		stepCountCrusade -= 20;
+		stepCountCrusade -= 10;
 	}
 		
 	//Leveling up 
