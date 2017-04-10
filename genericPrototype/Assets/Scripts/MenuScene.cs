@@ -480,4 +480,8 @@ public class MenuScene : MonoBehaviour
     public void loadLevel() {
         SceneManager.LoadScene("Level1");
     }
+
+    public void loadCreateAccount() {
+        SceneManager.LoadScene("UserAuthentication");
+    }
 }
