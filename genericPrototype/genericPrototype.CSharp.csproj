@@ -12,7 +12,7 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
@@ -78,6 +78,30 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Compat">
+      <HintPath>Assets\Firebase\Plugins\Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Analytics">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Database">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Sharpen">
+      <HintPath>Assets\Firebase\Plugins\Google.Sharpen.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AndroidSensor\Scripts\Callback\IPedometerCallback.cs" />
@@ -91,6 +115,7 @@
     <Compile Include="Assets\AndroidSensor\Scripts\Main\Utils.cs" />
     <Compile Include="Assets\AndroidSensor\Scripts\Main\UtilsPlugin.cs" />
     <Compile Include="Assets\Scripts\ActionItem.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameScene.cs" />
     <Compile Include="Assets\Scripts\Ghost.cs" />
     <Compile Include="Assets\Scripts\Helper.cs" />
@@ -100,21 +125,42 @@
     <Compile Include="Assets\Scripts\MenuScene.cs" />
     <Compile Include="Assets\Scripts\MotionPotion.cs" />
     <Compile Include="Assets\Scripts\PedometerDemo.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Preloader.cs" />
     <Compile Include="Assets\Scripts\ReceivedMovement.cs" />
+    <Compile Include="Assets\Scripts\RegisterInput.cs" />
+    <Compile Include="Assets\Scripts\RegisterUser.cs" />
     <Compile Include="Assets\Scripts\SaveManager.cs" />
     <Compile Include="Assets\Scripts\SaveState.cs" />
     <Compile Include="Assets\Scripts\SendInfo.cs" />
     <Compile Include="Assets\Scripts\StrongHeart.cs" />
     <Compile Include="Assets\Scripts\WorldInteraction.cs" />
+    <Compile Include="Assets\Scripts\goBack.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AndroidSensor\Features.txt" />
     <None Include="Assets\AndroidSensor\Meta.txt" />
     <None Include="Assets\AndroidSensor\ReadMe.txt.txt" />
     <None Include="Assets\AndroidSensor\changelog.txt" />
+    <None Include="Assets\Firebase\Editor\FirebaseAnalytics.txt" />
+    <None Include="Assets\Firebase\Editor\FirebaseAuth.txt" />
+    <None Include="Assets\Firebase\Editor\FirebaseDatabase.txt" />
+    <None Include="Assets\Firebase\Plugins\Http\link.xml" />
+    <None Include="Assets\Firebase\Plugins\link.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-analytics-unity\maven-metadata.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
+    <None Include="Assets\PlayServicesResolver\proguard-messaging-workaround.txt" />
+    <None Include="Assets\PlayServicesResolver\proguard-unity.txt" />
+    <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
     <None Include="Assets\Plugins\Android\aup_androidSensor\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\aup_androidSensor\SampleAndroidManifest\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\firebase-common-10.2.0\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\firebase-common-10.2.0\proguard.txt" />
+    <None Include="Assets\Plugins\Android\firebase-iid-10.2.0\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\firebase-iid-10.2.0\proguard.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

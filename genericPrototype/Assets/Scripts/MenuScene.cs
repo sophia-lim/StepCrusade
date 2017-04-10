@@ -20,8 +20,6 @@ public class MenuScene : MonoBehaviour
 	public Transform dialPanel;
 	public Transform settingsPanel;
 
-
-
 	public Text inventoryEquipButton;
 	public Text shopPurchaseButton;
 
@@ -53,11 +51,8 @@ public class MenuScene : MonoBehaviour
 		menuCam = FindObjectOfType<MenuCamera>();
 
 		//$$ TEMPORARY....Temporarily setting the amount of gold the player starts with to 999.
-		SaveManager.Instance.state.gold = 999;
-
-        //Set motion potion to 30 seconds
-        SaveManager.Instance.state.motionPotionCountdown = 30;
-
+		SaveManager.Instance.state.gold = 100;
+        
 		// Position our camera on the focu menu.
 		SetCameraTo(Manager.Instance.menuFocus);
 
