@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MotionPotion : MonoBehaviour {
 
     public bool isUsed;
-    public int timeLeft = 5;
+    public int timeLeft = 30;
     public Text countdownText;
 
-   // void Awake() {
-   //     DontDestroyOnLoad(this);
-   // }
+    //Have the counter exist throughout scenes
+    void Awake() {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 
 	// Use this for initialization
 	void Start () {
         isUsed = false;
-        StartCoroutine("LoseTime");
 	}
 	
 	// Update is called once per frame
@@ -28,15 +29,10 @@ public class MotionPotion : MonoBehaviour {
         }
 	}
 
+    //When motion potion is clicked, begin countdown
     public void useMotionPotion() {
         //remove one instance of motion potion
-        isUsed = true;
-    }
-
-    private void motionPotionTimer() {
-        if (isUsed) {
-            //Begin counter
-        }
+        StartCoroutine("LoseTime");
     }
 
     //Wait for a second, than decrement time left
@@ -46,4 +42,10 @@ public class MotionPotion : MonoBehaviour {
             timeLeft--;
         }
     }
+
+    //Test onClick function to move onto new scene
+    public void loadNewScene() {
+        SceneManager.LoadScene("powerUpsTestScene2");
+    }
+
 }

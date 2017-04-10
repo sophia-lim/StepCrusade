@@ -55,6 +55,9 @@ public class MenuScene : MonoBehaviour
 		//$$ TEMPORARY....Temporarily setting the amount of gold the player starts with to 999.
 		SaveManager.Instance.state.gold = 999;
 
+        //Set motion potion to 30 seconds
+        SaveManager.Instance.state.motionPotionCountdown = 30;
+
 		// Position our camera on the focu menu.
 		SetCameraTo(Manager.Instance.menuFocus);
 
@@ -76,7 +79,7 @@ public class MenuScene : MonoBehaviour
 
 
 		//Set player's preferences (equipment & purchases)
-		// this mightneed to be OnEquipment button.
+		// this might need to be OnEquipment button.
 		OnInventorySelect(SaveManager.Instance.state.activeEquipment);
 		SetEquipment(SaveManager.Instance.state.activeEquipment);
 
