@@ -90,16 +90,22 @@
     <Compile Include="Assets\AndroidSensor\Scripts\Main\ShakePlugin.cs" />
     <Compile Include="Assets\AndroidSensor\Scripts\Main\Utils.cs" />
     <Compile Include="Assets\AndroidSensor\Scripts\Main\UtilsPlugin.cs" />
+    <Compile Include="Assets\Scripts\ActionItem.cs" />
     <Compile Include="Assets\Scripts\GameScene.cs" />
     <Compile Include="Assets\Scripts\Ghost.cs" />
     <Compile Include="Assets\Scripts\Helper.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\MenuCamera.cs" />
     <Compile Include="Assets\Scripts\MenuScene.cs" />
+    <Compile Include="Assets\Scripts\MotionPotion.cs" />
     <Compile Include="Assets\Scripts\PedometerDemo.cs" />
     <Compile Include="Assets\Scripts\Preloader.cs" />
+    <Compile Include="Assets\Scripts\ReceivedMovement.cs" />
     <Compile Include="Assets\Scripts\SaveManager.cs" />
     <Compile Include="Assets\Scripts\SaveState.cs" />
+    <Compile Include="Assets\Scripts\SendInfo.cs" />
+    <Compile Include="Assets\Scripts\StrongHeart.cs" />
     <Compile Include="Assets\Scripts\WorldInteraction.cs" />
   </ItemGroup>
   <ItemGroup>
