@@ -136,6 +136,7 @@
     <Compile Include="Assets\Scripts\SaveState.cs" />
     <Compile Include="Assets\Scripts\SendInfo.cs" />
     <Compile Include="Assets\Scripts\StrongHeart.cs" />
+    <Compile Include="Assets\Scripts\User.cs" />
     <Compile Include="Assets\Scripts\WorldInteraction.cs" />
     <Compile Include="Assets\Scripts\goBack.cs" />
   </ItemGroup>
