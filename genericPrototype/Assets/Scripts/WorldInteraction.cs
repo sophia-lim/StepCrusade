@@ -18,12 +18,12 @@ public class WorldInteraction : MonoBehaviour {
 	}
 
 
-    void OnCollisionEnter(Collision col) {
-        Debug.Log("Had collided with ghost.");
+    /*void OnCollisionEnter(Collision col) {
+        //Debug.Log("Had collided with ghost.");
         if (col.gameObject.name == "Cube") {
             Destroy(col.gameObject);
         }
-    }
+    }*/
 
     void GetInteraction()
 	{
@@ -34,8 +34,10 @@ public class WorldInteraction : MonoBehaviour {
 			GameObject interactedObject = interactionInfo.collider.gameObject;
 			if (interactedObject.tag == "Interactable Object")
 			{
-				Debug.Log ("Interactable Interacted");
-			} else
+				interactedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
+				//Debug.Log ("Interactable Interacted");
+			} 
+			else
 			{
 				playerAgent.destination = interactionInfo.point;	
 			}

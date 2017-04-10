@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Ghost : MonoBehaviour {
+public class Ghost : Interactable {
 
 	public Button ghostInstance;
 	public Text ghostHPText;
