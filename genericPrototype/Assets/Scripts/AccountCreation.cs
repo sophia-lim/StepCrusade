@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AccountCreation : MonoBehaviour {
 
@@ -90,6 +91,10 @@ public class AccountCreation : MonoBehaviour {
     void Update() {
         email = emailText.text;
         password = passwordText.text;
+    }
+
+    public void goToLogin() {
+        SceneManager.LoadScene("Login");
     }
 
 }
