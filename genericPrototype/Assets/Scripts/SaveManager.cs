@@ -38,10 +38,11 @@ public class SaveManager : MonoBehaviour
 	{
 		if(PlayerPrefs.HasKey("save"))
 		{
-			// Deserialize Save State
-			state = Helper.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
+            // Deserialize Save State
+            state = Helper.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
+            Debug.Log("State loaded");
 
-		} else {
+        } else {
 			state = new SaveState ();
 			Save ();
 			Debug.Log ("No Save File found creating a new one");

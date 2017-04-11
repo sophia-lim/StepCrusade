@@ -51,7 +51,7 @@ public class MenuScene : MonoBehaviour
 		menuCam = FindObjectOfType<MenuCamera>();
 
 		//$$ TEMPORARY....Temporarily setting the amount of gold the player starts with to 999.
-		SaveManager.Instance.state.gold = 100;
+		//SaveManager.Instance.state.gold = 100;
         
 		// Position our camera on the focu menu.
 		SetCameraTo(Manager.Instance.menuFocus);
@@ -483,5 +483,9 @@ public class MenuScene : MonoBehaviour
 
     public void loadCreateAccount() {
         SceneManager.LoadScene("UserAuthentication");
+    }
+
+    public void loadMP() {
+        SceneManager.LoadScene("powerUpsTestScene");
     }
 }

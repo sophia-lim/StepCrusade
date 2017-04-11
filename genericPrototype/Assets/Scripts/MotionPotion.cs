@@ -6,32 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class MotionPotion : MonoBehaviour {
 
-    public bool isUsed;
-    public int timeLeft = 30;
     public Text countdownText;
 
     public int costMotionPotion = 10;
-    public int testGold = 10;
+    //public int testGold = 10;
     public Text motionPotionCountText;
-
-    //Have the counter exist throughout scenes
-    void Awake() {
-        DontDestroyOnLoad(this);
-    }
 
 	// Use this for initialization
 	void Start () {
-        isUsed = false;
-        SaveManager.Instance.state.motionPotionCountdown = 30;
-        SaveManager.Instance.state.motionPotionCount = 0;
 
         motionPotionCountText.text = SaveManager.Instance.state.motionPotionCount.ToString();
+        if(SaveManager.Instance.state.motionPotionCountdown > 0) {
+            StartCoroutine("LoseTime");
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        countdownText.text = ("Time left: " + timeLeft);
-        if (timeLeft <= 0) {
+        countdownText.text = ("Time left: " + SaveManager.Instance.state.motionPotionCountdown);
+        if (SaveManager.Instance.state.motionPotionCountdown <= 0) {
             StopCoroutine("LoseTime");
             countdownText.text = "Times Up!";
         }
@@ -40,26 +33,34 @@ public class MotionPotion : MonoBehaviour {
 	}
 
     public void buyMotionPotion() {
-        if (costMotionPotion > testGold) {
+        if (costMotionPotion > SaveManager.Instance.state.gold) {
             Debug.Log("Cannot purchase motion potion.");
-        } else if (costMotionPotion == testGold || costMotionPotion < testGold) {
+        } else if (costMotionPotion <= SaveManager.Instance.state.gold) {
             Debug.Log("Purchased motion potion.");
             SaveManager.Instance.state.motionPotionCount++;
-            testGold -= costMotionPotion;
+            SaveManager.Instance.state.gold -= costMotionPotion;
+            SaveManager.Instance.Save();
         }
     }
 
     //When motion potion is clicked, begin countdown
     public void useMotionPotion() {
         //remove one instance of motion potion
-        StartCoroutine("LoseTime");
+        if(SaveManager.Instance.state.motionPotionCount > 0 || SaveManager.Instance.state.motionPotionCountdown == 0) {
+            SaveManager.Instance.state.motionPotionCount--;
+            SaveManager.Instance.state.motionPotionCountdown = 30;
+            SaveManager.Instance.Save();
+            StartCoroutine("LoseTime");
+        }
+        
     }
 
     //Wait for a second, than decrement time left
     IEnumerator LoseTime() {
         while (true) {
             yield return new WaitForSeconds(1);
-            timeLeft--;
+            SaveManager.Instance.state.motionPotionCountdown--;
+            SaveManager.Instance.Save();
         }
     }
 

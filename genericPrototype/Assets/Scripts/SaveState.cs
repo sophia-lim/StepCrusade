@@ -1,7 +1,7 @@
 ﻿public class SaveState 
 {
-	// The amount of gold the player has.
-	public int gold = 0;
+    // The amount of gold the player has.
+    public int gold = 100;
 
 	// The completed levels. If you complete level 2 you can access level 3.
 	public int equipmentOwned = 0;
