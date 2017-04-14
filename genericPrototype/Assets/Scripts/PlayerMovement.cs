@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 	// toggle to check if we are moving or not.
 	public bool isMoving;
 
+	//public bool isKilling;
+
 	const int LEFT_MOUSE_BUTTON = 0;
 
 	// Use this for initialization
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 		targetPosition = transform.position;
 	
 		isMoving = false;
+
+		//isKilling = false;
 	}
 	
 	// Update is called once per frame
@@ -36,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
 		{
 			MovePlayer ();
 		}
+
+		/*if (isKilling) 
+		{
+			onMouseDown ();
+		}*/
 	}
 
 	void SetTargetPosition()
@@ -67,5 +76,13 @@ public class PlayerMovement : MonoBehaviour
 	{
 		isMoving = false;
 		speed = 0;
+		//isKilling = true;
+
 	}
+
+	/*void onMouseDown()
+	{
+		
+		Destroy (GameObject.FindGameObjectWithTag ("Enemy"));
+	}*/
 }
