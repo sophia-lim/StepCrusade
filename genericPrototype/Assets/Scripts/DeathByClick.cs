@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class DeathByClick : MonoBehaviour {
-	//public int health;
+
+    //Exported from Ghost class script
 
 	public Text ghostHPText;
 	public int ghostHP;
@@ -13,31 +14,36 @@ public class DeathByClick : MonoBehaviour {
 	public int doubleTap;
 	public Text doubleTapText;
 
+    public bool isDead;
+
 	public readonly int INIT_DOUBLETAP_VALUE = 0;
 	public readonly int INIT_GHOSTHP_VALUE = 3;
 
-	void Start () 
-	{
-			ghostHP = INIT_GHOSTHP_VALUE;
-			doubleTap = INIT_DOUBLETAP_VALUE;
-		
+    // Initialize HP
+	void Start () {
+		ghostHP = INIT_GHOSTHP_VALUE;
+		doubleTap = INIT_DOUBLETAP_VALUE;
+        isDead = false;
 	}
 
-	void Update () 
-	{
+    // Update the ghost HP as well as the taps
+	void Update () {
 		//Cast int to UI
 		ghostHPText.text = ghostHP.ToString ();
 		doubleTapText.text = doubleTap.ToString ();
 	}
 
-	void OnMouseDown () 
-	{
+    // Updated by Will: Commit 4/12/2017
+    // When clicking ghost, decrease HP
+	void OnMouseDown () {
 		ghostHP -= 1;
 		Handheld.Vibrate();
 
-		if (ghostHP == 0)
-		{
-			Destroy (gameObject);	
+		if (ghostHP == 0){
+            // Before destroying the gameObject, allow character to move again
+            Debug.Log("Setting killed monster to true");
+            PlayerMovement.instance.killedMonster = true;
+            Destroy (gameObject);	
 		}
 	}
 }

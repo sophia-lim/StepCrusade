@@ -116,6 +116,7 @@
     <Compile Include="Assets\AndroidSensor\Scripts\Main\UtilsPlugin.cs" />
     <Compile Include="Assets\Scripts\AccountCreation.cs" />
     <Compile Include="Assets\Scripts\ActionItem.cs" />
+    <Compile Include="Assets\Scripts\DeathByClick.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameScene.cs" />
     <Compile Include="Assets\Scripts\Ghost.cs" />
