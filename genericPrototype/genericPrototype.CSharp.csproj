@@ -131,6 +131,7 @@
     <Compile Include="Assets\Scripts\MenuCamera.cs" />
     <Compile Include="Assets\Scripts\MenuScene.cs" />
     <Compile Include="Assets\Scripts\MotionPotion.cs" />
+    <Compile Include="Assets\Scripts\Music.cs" />
     <Compile Include="Assets\Scripts\PedometerDemo.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Preloader.cs" />
