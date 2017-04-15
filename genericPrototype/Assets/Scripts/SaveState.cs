@@ -1,5 +1,15 @@
 ﻿public class SaveState 
 {
+
+    // Player information
+    public string username = "";
+    public string email = "";
+    public bool firstTime = true;
+    public bool hasRegistered = false;
+
+    // Index for skin/rags
+    public int currentSkin = 0;
+
     // The amount of gold the player has.
     public int gold = 100;
 
@@ -21,4 +31,5 @@
     public int strongHeartCountdown = 0;
     public int strongHeartCount = 0;
 	
+
 }

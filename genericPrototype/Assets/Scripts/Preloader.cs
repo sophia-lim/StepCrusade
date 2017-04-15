@@ -46,8 +46,12 @@ public class Preloader : MonoBehaviour
 		{
 			fadeGroup.alpha = Time.time - minimumLogoTime;
 			if (fadeGroup.alpha >= 1) 
-			{	
-				SceneManager.LoadScene ("Menu");
+			{
+                if (SaveManager.Instance.state.hasRegistered == false) {
+                    SceneManager.LoadScene("UserAuthentication");
+                } else if (SaveManager.Instance.state.hasRegistered == true) {
+                    SceneManager.LoadScene("Menu");
+                }
 			}
 		}
 	}

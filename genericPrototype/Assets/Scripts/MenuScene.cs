@@ -45,6 +45,8 @@ public class MenuScene : MonoBehaviour
 	private float zoomDuration = 3.0f;
 	private float zoomTransition;
 
+    public GameObject dialogBox;
+
 	private void Start () 
 	{
 		// Find the only MenuCamera and asign it
@@ -85,6 +87,14 @@ public class MenuScene : MonoBehaviour
 		inventoryPanel.GetChild(SaveManager.Instance.state.activeEquipment).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
 
 		shopPanel.GetChild(SaveManager.Instance.state.activeShopItem).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+
+        if (SaveManager.Instance.state.firstTime == true) {
+            dialogBox.SetActive(true);
+            SaveManager.Instance.state.firstTime = false;
+            SaveManager.Instance.Save();
+        } else {
+            dialogBox.SetActive(false);
+        }
 	}
 
 	private void Update() 
@@ -242,7 +252,7 @@ public class MenuScene : MonoBehaviour
 			// Is it currently equipped? 
 			if(activeInventoryIndex == currentIndex)
 			{
-				inventoryEquipButton.text ="Current";
+				inventoryEquipButton.text = "Current";
 			}
 				inventoryEquipButton.text = "Select";
 		} else 

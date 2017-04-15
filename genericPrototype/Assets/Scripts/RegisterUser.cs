@@ -55,7 +55,6 @@ public class RegisterUser : MonoBehaviour {
 
     //Move to createUserPanel
     public void goToPanelRegister() {
-        Debug.Log("Create hero button clicked.");
         changePanelPosition(1);
     }
 
