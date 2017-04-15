@@ -69,4 +69,8 @@ public class HeroCreation : MonoBehaviour {
         SaveManager.Instance.Save();
         congratulationMessagePopup.SetActive(true);
     }
+
+    public void goToMainMenu() {
+        SceneManager.LoadScene("Menu");
+    }
 }

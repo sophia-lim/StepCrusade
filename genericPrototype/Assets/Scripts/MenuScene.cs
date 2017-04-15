@@ -459,6 +459,11 @@ public class MenuScene : MonoBehaviour
 		goldText.text = SaveManager.Instance.state.gold.ToString ();
 	}
 
+    public void acceptGift() {
+        SaveManager.Instance.state.firstTime = false;
+        // Play "ding" noise
+        dialogBox.SetActive(false);
+    }
 
 	//Buttons
 	public void OnEquipmentClick()
