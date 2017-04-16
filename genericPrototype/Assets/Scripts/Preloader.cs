@@ -14,6 +14,7 @@ public class Preloader : MonoBehaviour
 	// The minimum time of that scene. Will show the logo for a minimum of 3 seconds.
 	private float minimumLogoTime = 3.0f; 
 
+
 	private void Start() 
 	{
 		// Grab the only Canvas Group in the scene.
@@ -46,8 +47,12 @@ public class Preloader : MonoBehaviour
 		{
 			fadeGroup.alpha = Time.time - minimumLogoTime;
 			if (fadeGroup.alpha >= 1) 
-			{	
-				SceneManager.LoadScene ("Menu");
+			{
+                if (SaveManager.Instance.state.hasRegistered == false) {
+                    SceneManager.LoadScene("UserAuthentication");
+                } else if (SaveManager.Instance.state.hasRegistered == true) {
+                    SceneManager.LoadScene("Menu");
+                }
 			}
 		}
 	}

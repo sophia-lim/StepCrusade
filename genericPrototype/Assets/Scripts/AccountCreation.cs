@@ -93,8 +93,8 @@ public class AccountCreation : MonoBehaviour {
         password = passwordText.text;
     }
 
-    public void goToLogin() {
-        SceneManager.LoadScene("Login");
+    public void goToRegister() {
+        SceneManager.LoadScene("Register");
     }
 
 }

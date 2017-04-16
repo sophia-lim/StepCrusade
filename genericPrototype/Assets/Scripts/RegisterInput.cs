@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RegisterInput : MonoBehaviour {
+    
 
     // Checks if there is anything entered into the input field.
     // From Unity3D documentation: https://docs.unity3d.com/ScriptReference/UI.InputField-onEndEdit.html
-    public InputField heroNameInput;
-    public Text heroName;
 
     public InputField emailInput;
     public Text email;
 
     public InputField passwordInput;
     private Text password;
-
-    public InputField confirmPasswordInput;
-    private Text confirmPassword;
-
 
     // Checks if there is anything entered into the input field.
     void LockInput(InputField input, Text textObj) {
@@ -34,7 +30,6 @@ public class RegisterInput : MonoBehaviour {
     public void Start() {
         //Adds a listener that invokes the "LockInput" method when the player finishes editing the main input field.
         //Passes the main input field into the method when "LockInput" is invoked
-        heroNameInput.onEndEdit.AddListener(delegate { LockInput(heroNameInput, heroName); });
         emailInput.onEndEdit.AddListener(delegate { LockInput(emailInput, email); });
         passwordInput.onEndEdit.AddListener(delegate { LockInput(passwordInput, password); });
     }
@@ -42,5 +37,19 @@ public class RegisterInput : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+    }
+
+
+
+    /*********************
+    ***** NAVIGATION *****
+    **********************/
+
+    public void goToLoginScreen() {
+        SceneManager.LoadScene("Login");
+    }
+
+    public void goToMenuScreen() {
+        SceneManager.LoadScene("Menu");
     }
 }
