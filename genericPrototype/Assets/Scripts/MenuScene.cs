@@ -9,8 +9,7 @@ public class MenuScene : MonoBehaviour
 	private CanvasGroup fadeGroup;
 	// Last 3 seconds = 0.33f. If u wanted 10 seconds = 0.10f;
 	private float fadeInSpeed = 0.33f;
-
-
+    
 	public RectTransform menuContainer; 
 	public Transform mapPanel;
 
@@ -23,7 +22,15 @@ public class MenuScene : MonoBehaviour
 	public Text inventoryEquipButton;
 	public Text shopPurchaseButton;
 
+    public Text stepsText;
+    public Text progressSteps;
 
+    public Text stepsToLvl;
+    public Text progressLvl;
+
+    public Text level;
+    public Text heroName;
+    
 	//Setting the price for the actual items in the inventory
 	private int[] inventoryCost = new int[] {0, 5, 5, 5, 10, 10, 10, 15, 15, 10 };
 	// Setting the proce for the actual items in the shop
@@ -36,7 +43,6 @@ public class MenuScene : MonoBehaviour
 	public Text goldText;
 	private int activeInventoryIndex;
 	private int activePurchaseIndex;
-
 
 	private Vector3 desiredMenuPosition;
 
@@ -106,18 +112,21 @@ public class MenuScene : MonoBehaviour
 		// If you want the speed of the transition to be faster increase 0.1f, to slow it, decrease 0.1f
 		menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPosition, 0.1f);
 
-		//Entering level zoomDuration.
-		if(isEnteringLevel)
+        //Entering level zoomDuration.
+        if (isEnteringLevel)
 		{
 			// Add to the zoomTransition float.
 			zoomTransition += (1/zoomDuration) * Time.deltaTime;
 
 			// Change the scale, followingthe AnimationCurve.
 			menuContainer.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 5, enteringLevelZoomCurve.Evaluate(zoomTransition));
-		
-			//Change the desired position of the canvas, so it can follow the scale up.
-			//This zooms in the center.
-			Vector3 newDesiredPosition = desiredMenuPosition * 5;
+
+            // Display char info
+            displayCharacterInfo();
+
+            //Change the desired position of the canvas, so it can follow the scale up.
+            //This zooms in the center.
+            Vector3 newDesiredPosition = desiredMenuPosition * 5;
 			//This adds to the specific position of the level on the canvas.
 			RectTransform rt = mapPanel.GetChild(Manager.Instance.currentLevel).GetComponent<RectTransform>();
 			newDesiredPosition -= rt.anchoredPosition3D * 5;
@@ -137,9 +146,33 @@ public class MenuScene : MonoBehaviour
 		}
 	}
 
-	
+   
+    /*********************
+    ***    USER  UI    ***
+    **********************/
+    private void displayCharacterInfo() {
+        // Calculating the daily step progress with 500 steps a day
+        stepsText.text = SaveManager.Instance.state.dailyStepCounts.ToString();
+        progressSteps.text = calculateProgress(SaveManager.Instance.state.dailyStepCounts, SaveManager.Instance.state.maxDailySteps).ToString() + "%";
 
-	private void InitShop()
+        // Calculating the step progress into levelling with 1000 steps/level
+        stepsToLvl.text = (SaveManager.Instance.state.maxLevelSteps - SaveManager.Instance.state.dailyStepCounts).ToString();
+        progressLvl.text = calculateProgress(SaveManager.Instance.state.dailyStepCounts, SaveManager.Instance.state.maxLevelSteps).ToString() + "%";
+
+        // Displaying the character's level and name
+        level.text = SaveManager.Instance.state.levelCrusade.ToString();
+        heroName.text = SaveManager.Instance.state.username.ToString();
+    }
+
+	private int calculateProgress(int steps, int total) {
+        return Mathf.CeilToInt(steps/total);
+    }
+
+   
+    /*********************
+    ***  INITIALIZERS  ***
+    **********************/
+    private void InitShop()
 	{
 		// Just make sure we've assigned the references.
 		if (inventoryPanel == null || shopPanel == null)
@@ -228,7 +261,11 @@ public class MenuScene : MonoBehaviour
 		}
 	}
 
-	private void OnInventorySelect (int currentIndex)
+    
+    /*********************
+    ***  ITEM MANAGER  ***
+    **********************/
+    private void OnInventorySelect (int currentIndex)
 	{
 		Debug.Log ("Selecting Inventory Item : " + currentIndex);
 
@@ -297,14 +334,12 @@ public class MenuScene : MonoBehaviour
 
 		}
 
-	
 	private void OnMapSelect (int currentIndex)
 	{
 		Manager.Instance.currentLevel = currentIndex;
 		//Debug.Log ("Selecting QualityLevel : " + currentIndex);
 		isEnteringLevel = true;
 	}
-
 
 	public void OnEquipButton()
 	{
@@ -376,6 +411,10 @@ public class MenuScene : MonoBehaviour
 		}
 	}
 
+    
+    /*********************
+    ***   NAVIGATION   ***
+    **********************/
 	private void SetCameraTo(int menuIndex)
 	{
 
@@ -465,8 +504,10 @@ public class MenuScene : MonoBehaviour
         dialogBox.SetActive(false);
     }
 
-	//Buttons
-	public void OnEquipmentClick()
+    /*********************
+    ***     BUTTONS    ***
+    **********************/
+    public void OnEquipmentClick()
 	{
 		NavigateTo (1);
 	}

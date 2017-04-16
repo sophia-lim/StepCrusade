@@ -1,4 +1,5 @@
-﻿public class SaveState 
+﻿
+public class SaveState 
 {
 
     // Player information
@@ -9,6 +10,21 @@
 
     // Index for skin/rags
     public int currentSkin = 0;
+
+    // Daily check
+    public bool firstLoading = true;
+    public int firstLoadingDate;
+    public int lastDay;
+
+    // Step counts
+    public int totalStepCounts = 0;
+    public int dailyStepCounts = 0;
+    public int maxDailySteps = 500;
+    public int maxLevelSteps = 1000;
+
+    // Mana and level
+    public int manaCrusade = 0;
+    public int levelCrusade = 0;
 
     // The amount of gold the player has.
     public int gold = 100;

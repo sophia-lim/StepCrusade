@@ -11,12 +11,30 @@ public class Preloader : MonoBehaviour
 	// To keep track of time.
 	private float loadTime;
 
+
 	// The minimum time of that scene. Will show the logo for a minimum of 3 seconds.
 	private float minimumLogoTime = 3.0f; 
 
-
 	private void Start() 
 	{
+        Debug.Log(System.DateTime.Now);
+        // If it is the first time opening the game, save the date
+        // Else, if it not the first time, check if the loading date has changed
+        // --- If it has changed by over a day, reset the daily step counts
+        // --- If it has not changed, do not reset dailyr step counts
+        if (SaveManager.Instance.state.firstLoading) {
+            Debug.Log("First time loading game: " + System.DateTime.Now.Day);
+            SaveManager.Instance.state.firstLoadingDate = System.DateTime.Now.Day;
+            SaveManager.Instance.state.lastDay = System.DateTime.Now.Day;
+            SaveManager.Instance.state.firstLoading = false;
+            SaveManager.Instance.Save();
+        } else {
+            if (System.DateTime.Now.Day - SaveManager.Instance.state.lastDay >= 1) {
+                //Reset step count
+                SaveManager.Instance.state.dailyStepCounts = 0;
+            }
+        }
+
 		// Grab the only Canvas Group in the scene.
 		// If there are multiple canvas groups in the scene, this will return the wrong thing and not work.
 		fadeGroup = FindObjectOfType<CanvasGroup>();

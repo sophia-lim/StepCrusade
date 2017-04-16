@@ -135,6 +135,8 @@
     <Compile Include="Assets\Scripts\PedometerDemo.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Preloader.cs" />
+    <Compile Include="Assets\Scripts\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts\RadialProgressBar.cs" />
     <Compile Include="Assets\Scripts\ReceivedMovement.cs" />
     <Compile Include="Assets\Scripts\RegisterInput.cs" />
     <Compile Include="Assets\Scripts\RegisterUser.cs" />

@@ -17,8 +17,8 @@ public class PedometerDemo : MonoBehaviour {
 	//Edit by StepCrusade for mana crusade
 	public Text manaCrusadeText;
 	public Text stepCountCrusadeText;
-	public int manaCrusade = 0;
-	public int stepCountCrusade = 0;
+    public int stepCountCrusade = 0;
+    public int dailyStepCounts = 0;
 	public bool isTapped = false;
 
 	//Edit by StepCrusade for level
@@ -28,6 +28,10 @@ public class PedometerDemo : MonoBehaviour {
 	//Go back to menu
     public void goToMenu() {
         SceneManager.LoadScene("Menu");
+    }
+
+    void Awake() {
+        DontDestroyOnLoad(this.gameObject);
     }
 
 	
@@ -60,14 +64,14 @@ public class PedometerDemo : MonoBehaviour {
 			//register sensor event listener and pass sensor delay that you want
 			pedometerPlugin.RegisterSensorListener(SensorDelay.SENSOR_DELAY_FASTEST);
 
-		}else{
+		} else {
 			UpdateStepDetectorStatus("not available");
 		}
 	}
 
 	void Update() {
-		manaCrusadeText.text = manaCrusade.ToString ();
-		stepCountCrusadeText.text = stepCountCrusade.ToString ();
+		manaCrusadeText.text = SaveManager.Instance.state.manaCrusade.ToString ();
+		stepCountCrusadeText.text = SaveManager.Instance.state.dailyStepCounts.ToString ();
 	}
 
 	public void ResetTotalStep(){
@@ -120,7 +124,7 @@ public class PedometerDemo : MonoBehaviour {
 	private void UpdateStepCount(int count){
 		if(stepCountText!=null){
 			stepCountText.text = String.Format("Step Count: {0}",count);
-			stepCountCrusade = count - (manaCrusade*200);
+			stepCountCrusade = count - (SaveManager.Instance.state.manaCrusade *200);
 			calculateMana (stepCountCrusade);
 			calculateLevelCrusade (count);
 		}
@@ -136,17 +140,17 @@ public class PedometerDemo : MonoBehaviour {
 	//Transforms step counts into mana (activity level)
     //For testing purposes, the value is 10, but in-game should be 200
 	public void calculateMana(int stepCrusadeCounts){
-		if (stepCrusadeCounts != 0 && stepCrusadeCounts%10 == 0 && manaCrusade != 100) {
-			manaCrusade += 1;
+		if (stepCrusadeCounts != 0 && stepCrusadeCounts%10 == 0 && SaveManager.Instance.state.manaCrusade != 100) {
+            SaveManager.Instance.state.manaCrusade += 1;
 			updateStepCrusadeCounts();
 		}
 	}
 
 	//Updates mana after hitting ghosts
 	public void updateMana() {
-		if (isTapped && manaCrusade > 0) {
-			manaCrusade -= 1;
-		} else if (isTapped && manaCrusade == 0){
+		if (isTapped && SaveManager.Instance.state.manaCrusade > 0) {
+            SaveManager.Instance.state.manaCrusade -= 1;
+		} else if (isTapped && SaveManager.Instance.state.manaCrusade == 0){
 			Debug.Log ("Not enough mana.");
 		}
 	}
