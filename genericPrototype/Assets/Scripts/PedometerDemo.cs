@@ -67,12 +67,22 @@ public class PedometerDemo : MonoBehaviour {
 		} else {
 			UpdateStepDetectorStatus("not available");
 		}
-	}
+
+
+        if (SaveManager.Instance.state.motionPotionCount > 0) {
+            useMotionPotion();
+        }
+    }
 
 	void Update() {
 		manaCrusadeText.text = SaveManager.Instance.state.manaCrusade.ToString ();
 		stepCountCrusadeText.text = SaveManager.Instance.state.dailyStepCounts.ToString ();
-	}
+        if (SaveManager.Instance.state.motionPotionCountdown <= 0) {
+            SaveManager.Instance.state.motionPotionCount = 0;
+            StopCoroutine("LoseTime");
+            SaveManager.Instance.Save();
+        }
+    }
 
 	public void ResetTotalStep(){
 		//reset total step to zero
@@ -113,7 +123,6 @@ public class PedometerDemo : MonoBehaviour {
 		Debug.Log( demoName + "OnStepDetect");
 	}
 
-
 	private void UpdateStepDetectorStatus(string val){
 		if(hasStepDetectorStatusText!=null){
 			hasStepDetectorStatusText.text = String.Format("Status: {0}", val);
@@ -140,7 +149,11 @@ public class PedometerDemo : MonoBehaviour {
 	//Transforms step counts into mana (activity level)
     //For testing purposes, the value is 10, but in-game should be 200
 	public void calculateMana(int stepCrusadeCounts){
-		if (stepCrusadeCounts != 0 && stepCrusadeCounts%10 == 0 && SaveManager.Instance.state.manaCrusade != 100) {
+        //If there's 1 motion potion, use it to increase X5
+        if (stepCrusadeCounts != 0 && stepCrusadeCounts % 10 == 0 && SaveManager.Instance.state.manaCrusade != 100 && SaveManager.Instance.state.motionPotionCountdown > 0) {
+            SaveManager.Instance.state.manaCrusade += 5;
+        //Else just increment normally by 1
+        } else if (stepCrusadeCounts != 0 && stepCrusadeCounts%10 == 0 && SaveManager.Instance.state.manaCrusade != 100) {
             SaveManager.Instance.state.manaCrusade += 1;
 			updateStepCrusadeCounts();
 		}
@@ -159,9 +172,29 @@ public class PedometerDemo : MonoBehaviour {
 	public void updateStepCrusadeCounts(){
 		stepCountCrusade -= 10;
 	}
-		
-	//Leveling up 
-	public void calculateLevelCrusade(int stepCounts) {
+
+    //Use motion potion when there is one
+    private void useMotionPotion() {
+        //remove one instance of motion potion
+        if (SaveManager.Instance.state.motionPotionCount > 0 || SaveManager.Instance.state.motionPotionCountdown == 0) {
+            SaveManager.Instance.state.motionPotionCount--;
+            SaveManager.Instance.state.motionPotionCountdown = 300;
+            SaveManager.Instance.Save();
+            StartCoroutine("LoseTime");
+        }
+    }
+
+    //Wait for a second, than decrement time left
+    IEnumerator LoseTime() {
+        while (true) {
+            yield return new WaitForSeconds(1);
+            SaveManager.Instance.state.motionPotionCountdown--;
+            SaveManager.Instance.Save();
+        }
+    }
+
+    //Leveling up 
+    public void calculateLevelCrusade(int stepCounts) {
 		if (stepCounts != 0 && stepCounts % 50 == 0 && levelCrusade <= 99) {
 			levelCrusade += 1;
 			levelCrusadeText.text = levelCrusade.ToString();
