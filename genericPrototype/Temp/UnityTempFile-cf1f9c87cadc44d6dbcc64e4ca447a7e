@@ -27,10 +27,7 @@
 -r:'/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll'
 -r:'/Applications/Unity/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll'
 -r:'/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll'
--r:'/Applications/Unity/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll'
--r:'/Applications/Unity/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll'
 -r:'/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll'
--r:'/Applications/Unity/PlaybackEngines/Facebook/UnityEditor.Facebook.Extensions.dll'
 -r:'Assets/Firebase/Editor/Firebase.Editor.dll'
 -r:'Assets/Firebase/Plugins/Firebase.Analytics.dll'
 -r:'Assets/Firebase/Plugins/Firebase.App.dll'
@@ -113,7 +110,6 @@
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_OSX
 -define:ENABLE_NATIVE_ARRAY_CHECKS
--define:UNITY_TEAM_LICENSE
 -define:ENABLE_DUCK_TYPING
 -define:UNITY_HAS_GOOGLEVR
 'Assets/AndroidSensor/Scripts/Extension/UGUI/Editor/uGUITools.cs'
