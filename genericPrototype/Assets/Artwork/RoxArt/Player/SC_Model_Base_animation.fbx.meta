@@ -1,5 +1,7 @@
 fileFormatVersion: 2
-guid: 014ab0dbb13a8ba4f97ad7ef580d1b55
+guid: 44dd60022f86a45dfa488d25738b38cb
+timeCreated: 1492451575
+licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -14,9 +16,11 @@ ModelImporter:
     100016: Bone.004
     100018: Bone.004_end
     100020: Bone_end
-    100022: Cube
-    100024: model base
-    100026: //RootNode
+    100022: Camera
+    100024: Cube
+    100026: Lamp
+    100028: model base
+    100030: //RootNode
     400000: Armature
     400002: Bone
     400004: Bone.001
@@ -28,9 +32,11 @@ ModelImporter:
     400016: Bone.004
     400018: Bone.004_end
     400020: Bone_end
-    400022: Cube
-    400024: model base
-    400026: //RootNode
+    400022: Camera
+    400024: Cube
+    400026: Lamp
+    400028: model base
+    400030: //RootNode
     2300000: Cube
     3300000: Cube
     4300000: Cube
@@ -72,7 +78,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

@@ -172,9 +172,6 @@
  <Reference Include="Unity.Tasks">
  <HintPath>/Users/WilliamMcGuinness/Desktop/StepCrusade/genericPrototype/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
  </Reference>
- <Reference Include="Google.IOSResolver">
- <HintPath>/Users/WilliamMcGuinness/Desktop/StepCrusade/genericPrototype/Assets/PlayServicesResolver/Editor/Google.IOSResolver.dll</HintPath>
- </Reference>
  <Reference Include="Google.JarResolver">
  <HintPath>/Users/WilliamMcGuinness/Desktop/StepCrusade/genericPrototype/Assets/PlayServicesResolver/Editor/Google.JarResolver.dll</HintPath>
  </Reference>

@@ -40,7 +40,6 @@
 -r:'Assets/Firebase/Plugins/Google.Sharpen.dll'
 -r:'Assets/Firebase/Plugins/Unity.Compat.dll'
 -r:'Assets/Firebase/Plugins/Unity.Tasks.dll'
--r:'Assets/PlayServicesResolver/Editor/Google.IOSResolver.dll'
 -r:'Assets/PlayServicesResolver/Editor/Google.JarResolver.dll'
 -r:'Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll'
 -r:'/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll'
