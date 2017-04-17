@@ -40,12 +40,14 @@ public class DeathByClick : MonoBehaviour {
         Handheld.Vibrate();
 
         if (ghostHP == 0) {
+			
             // Before destroying the gameObject, allow character to move again
             Debug.Log("Setting killed monster to true");
             SaveManager.Instance.state.gold += Random.Range(0, 10);
             SaveManager.Instance.Save();
             PlayerMovement.instance.killedMonster = true;
-            Destroy(gameObject);
+
+			Destroy(gameObject);
         }
     }
 }
