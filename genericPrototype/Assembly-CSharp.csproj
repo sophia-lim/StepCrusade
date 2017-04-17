@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\Music.cs" />
      <Compile Include="Assets\Scripts\PedometerDemo.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\PowerUpButton.cs" />
      <Compile Include="Assets\Scripts\Preloader.cs" />
      <Compile Include="Assets\Scripts\ProgressBar.cs" />
      <Compile Include="Assets\Scripts\RadialProgressBar.cs" />
