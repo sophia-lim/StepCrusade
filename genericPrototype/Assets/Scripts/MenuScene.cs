@@ -53,8 +53,14 @@ public class MenuScene : MonoBehaviour
 
     public GameObject dialogBox;
 
+	//For resolving mana bar position issues that we're too stressed to deal with.
+	public GameObject manaBar;
+
 	private void Start () 
 	{
+		// Mana bar begins in active state.
+		manaBar.SetActive(true);
+
 		// Find the only MenuCamera and asign it
 		menuCam = FindObjectOfType<MenuCamera>();
 
@@ -430,27 +436,32 @@ public class MenuScene : MonoBehaviour
 		{
 		default:
 		case 0:
+			//GameObject.Find("manaBar").SetActive(true);
 			desiredMenuPosition = Vector3.zero;
 			menuCam.BackToMainMenu();
 			break;
 		// 1 = Equipment
 		case 1:
-			// In future iterations, 1600 might need to be changed to screen width when the ratio changes. 
+			// In future iterations, 1600 might need to be changed to screen width when the ratio changes.
+			//GameObject.Find("manaBar").SetActive(false);
 			desiredMenuPosition = Vector3.right * 1280;
 			menuCam.MoveToShop();
 			break;
 		//2 = Map
 		case 2:
+			//GameObject.Find("manaBar").SetActive(false);
 			desiredMenuPosition = Vector3.left * 1280;
             menuCam.MoveToLevel();
 			break;
 
 		case 3:
+			//GameObject.Find("manaBar").SetActive(false);
 			desiredMenuPosition = Vector3.down * 800;
 			menuCam.MoveToDial();
 			break;
 
 		case 4: 
+			//GameObject.Find("manaBar").SetActive(false);
 			desiredMenuPosition = Vector3.up * 800;
 			menuCam.MoveToSettings();
 			break;
@@ -509,28 +520,38 @@ public class MenuScene : MonoBehaviour
     **********************/
     public void OnEquipmentClick()
 	{
+		
+		manaBar.SetActive(false);
 		NavigateTo (1);
 	}
 
 	public void OnMapClick() 
 	{
+		manaBar.SetActive(false);
 		NavigateTo (2);
+
 	}
 
 	public void OnBackClick()
 	{
+		manaBar.SetActive(true);
 		NavigateTo (0);
+
 	}
 
 	public void OnDialClick()
 	{
 		//Debug.Log ("I've clicked");
+		manaBar.SetActive(false);
 		NavigateTo (3);
+
 
 	}
 	public void OnSettingsClick()
 	{
+		manaBar.SetActive(false);
 		NavigateTo (4);
+
 	}
 
     public void loadLevel() {
