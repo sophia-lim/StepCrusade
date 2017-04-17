@@ -17,7 +17,12 @@ public class Preloader : MonoBehaviour
 
 	private void Start() 
 	{
+        // For debug. Comment out later
+        SaveManager.Instance.state.hasRegistered = false;
+        SaveManager.Instance.Save();
+
         Debug.Log(System.DateTime.Now);
+
         // If it is the first time opening the game, save the date
         // Else, if it not the first time, check if the loading date has changed
         // --- If it has changed by over a day, reset the daily step counts

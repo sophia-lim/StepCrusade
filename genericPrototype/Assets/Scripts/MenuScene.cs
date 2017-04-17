@@ -112,6 +112,9 @@ public class MenuScene : MonoBehaviour
 		// If you want the speed of the transition to be faster increase 0.1f, to slow it, decrease 0.1f
 		menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPosition, 0.1f);
 
+        // Display char info
+        displayCharacterInfo();
+
         //Entering level zoomDuration.
         if (isEnteringLevel)
 		{
@@ -120,9 +123,6 @@ public class MenuScene : MonoBehaviour
 
 			// Change the scale, followingthe AnimationCurve.
 			menuContainer.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 5, enteringLevelZoomCurve.Evaluate(zoomTransition));
-
-            // Display char info
-            displayCharacterInfo();
 
             //Change the desired position of the canvas, so it can follow the scale up.
             //This zooms in the center.
@@ -161,7 +161,7 @@ public class MenuScene : MonoBehaviour
 
         // Displaying the character's level and name
         level.text = SaveManager.Instance.state.levelCrusade.ToString();
-        heroName.text = SaveManager.Instance.state.username.ToString();
+        heroName.text = SaveManager.Instance.state.username;
     }
 
 	private int calculateProgress(int steps, int total) {
