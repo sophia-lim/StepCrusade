@@ -19,6 +19,8 @@ public class MenuScene : MonoBehaviour
 	public Transform dialPanel;
 	public Transform settingsPanel;
 
+	public Transform customizePanel;
+
 	public Text inventoryEquipButton;
 	public Text shopPurchaseButton;
 
@@ -466,6 +468,12 @@ public class MenuScene : MonoBehaviour
 			menuCam.MoveToSettings();
 			break;
 			// Future cases for up will require a Vector 3 to be multiplied by 800 (the screen height)
+
+		case 5:
+			desiredMenuPosition = Vector3.right * 1280;
+			desiredMenuPosition = Vector3.down * 800;
+			menuCam.MoveToCustomize ();
+			break;
 		}
 	}
 
@@ -552,6 +560,11 @@ public class MenuScene : MonoBehaviour
 		manaBar.SetActive(false);
 		NavigateTo (4);
 
+	}
+
+	public void OnCustomizeClick()
+	{
+		NavigateTo (5);
 	}
 
     public void loadLevel() {
