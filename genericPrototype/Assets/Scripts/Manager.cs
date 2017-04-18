@@ -6,9 +6,12 @@ public class Manager : MonoBehaviour {
 
 	public static Manager Instance {set; get;}
     public int skinIndex = 0;
+	public int eyeIndex = 0;
 
 	public Material playerMaterial;
+	public Material eyeMaterial;
 	public Texture[] playerTextures = new Texture[4];
+	public Texture[] eyeballTextures = new Texture[4];
 	public Color[] playerColors = new Color[10];
 	public GameObject[] shopItems = new GameObject[2];
 

@@ -17,6 +17,8 @@ public class HeroCreation : MonoBehaviour {
     
     public Texture[] skinTextures = new Texture[4];
 
+	public Texture[] eyeTextures = new Texture[4];
+
     // Use this for initialization
     void Start () {
         congratulationMessagePopup.SetActive(false);
@@ -54,10 +56,41 @@ public class HeroCreation : MonoBehaviour {
     public void changeSkinColour_04() {
         //SaveManager.Instance.state.currentSkin = 4;
         SaveManager.Instance.state.activeEquipment = 3;
-        Manager.Instance.playerMaterial.mainTexture = Manager.Instance.playerTextures[3];
+        Manager.Instance.eyeMaterial.mainTexture = Manager.Instance.playerTextures[3];
         Manager.Instance.skinIndex = 3;
         SaveManager.Instance.Save();
     }
+
+	public void changeEyeColour_01()
+	{
+		SaveManager.Instance.state.activeEquipment = 0;
+		Manager.Instance.eyeMaterial.mainTexture = Manager.Instance.eyeballTextures[0];
+		Manager.Instance.eyeIndex = 0;
+		SaveManager.Instance.Save();
+		
+	}
+
+	public void changeEyeColour_02() {
+		SaveManager.Instance.state.activeEquipment = 1;
+		Manager.Instance.eyeMaterial.mainTexture = Manager.Instance.eyeballTextures[1];
+		Manager.Instance.eyeIndex = 1;
+		SaveManager.Instance.Save();
+	}
+
+	public void changeEyeColour_03() {
+		SaveManager.Instance.state.activeEquipment = 2;
+		Manager.Instance.eyeMaterial.mainTexture = Manager.Instance.eyeballTextures[2];
+		Manager.Instance.eyeIndex = 2;
+		SaveManager.Instance.Save();
+	}
+
+	public void changeEyeColour_04() {
+		SaveManager.Instance.state.activeEquipment = 3;
+		Manager.Instance.eyeMaterial.mainTexture = Manager.Instance.eyeballTextures[3];
+		Manager.Instance.eyeIndex = 3;
+		SaveManager.Instance.Save();
+	}
+
 
 
     // Pops up a congratulations dialog box once the user applies the skin and eyes
