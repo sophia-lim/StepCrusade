@@ -23,8 +23,16 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool killedMonster;
 
+	// for the animations
+	Animator anim;
+
 	// Use this for initialization
 	void Start () {
+
+		anim = GetComponent<Animator> ();
+
+
+
         instance = this;
 		// set the target position to where we are at the start.
 		targetPosition = transform.position;
@@ -36,14 +44,19 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+
 		if(Input.GetMouseButton(LEFT_MOUSE_BUTTON)){
 			SetTargetPosition ();
 		}
 
+		anim.SetBool("isWalking", false);
 		if(isMoving) {
+			
 			MovePlayer ();
-		}
 
+		}
+		anim.SetBool("isSlashing", false);
         if (killedMonster == true) {
             isMoving = true;
             speed = CONTINUE_MOVEMENT;
@@ -65,6 +78,7 @@ public class PlayerMovement : MonoBehaviour {
     // Set: rotation of character to click position
     // Move character to clicked position
 	void MovePlayer() {
+		anim.SetBool("isWalking", true);
 		transform.LookAt (targetPosition);
 		transform.position = Vector3.MoveTowards (transform.position, targetPosition, speed * Time.deltaTime);
 
@@ -79,6 +93,8 @@ public class PlayerMovement : MonoBehaviour {
     // Set: movement to zero
     // Set: can kill to true
 	void OnTriggerEnter (Collider other) {
+		anim.SetBool("isWalking", false);
+		anim.SetBool("isSlashing", true);
         killedMonster = false;
         isMoving = false;
         canKill = true;

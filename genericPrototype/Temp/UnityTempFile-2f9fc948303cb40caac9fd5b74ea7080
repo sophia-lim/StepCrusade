@@ -107,6 +107,7 @@
 'Assets/AndroidSensor/Scripts/Main/UtilsPlugin.cs'
 'Assets/Scripts/AccountCreation.cs'
 'Assets/Scripts/ActionItem.cs'
+'Assets/Scripts/CompleteCameraController.cs'
 'Assets/Scripts/DeathByClick.cs'
 'Assets/Scripts/DialCustomization.cs'
 'Assets/Scripts/Enemy.cs'

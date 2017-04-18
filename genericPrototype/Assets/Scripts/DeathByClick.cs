@@ -19,11 +19,15 @@ public class DeathByClick : MonoBehaviour {
     public readonly int INIT_DOUBLETAP_VALUE = 0;
     public readonly int INIT_GHOSTHP_VALUE = 10;
 
+	Animator anim;
+
     // Initialize HP
     void Start() {
         ghostHP = INIT_GHOSTHP_VALUE;
         doubleTap = INIT_DOUBLETAP_VALUE;
         isDead = false;
+
+	
     }
 
     // Update the ghost HP as well as the taps
